@@ -25,36 +25,32 @@
 ---
 ## 🚀 Submission Details
 - **Status**: Accepted
-- **Runtime**: 8 ms
-- **Memory**: 65.2 MB
+- **Runtime**: 32 ms
+- **Memory**: 54.4 MB
 
 ## 💻 Code
 ```java
-class Solution {
-    public List<List<String>> partition(String s) {
-        List<List<String>> ans = new ArrayList<>();
-        backtrack(s, 0, new ArrayList<>(), ans);
-        return ans;
+class StockSpanner {
+    Stack<int[]> st;
+
+    public StockSpanner() {
+        st = new Stack<>();
     }
-    private void backtrack(String s, int idx, List<String> curr, List<List<String>> ans ){
-        if(idx == s.length()){
-            ans.add(new ArrayList<>(curr));
-            return;
+    
+    public int next(int price) {
+        int span =1;
+        while(!st.isEmpty() && st.peek()[0] <= price){
+            span += st.pop()[1];
         }
-        for(int i=idx; i<s.length(); i++){
-            if(isPalindrome(s, idx, i)){
-                curr.add(s.substring(idx, i+1));
-                backtrack(s, i+1, curr, ans);
-                curr.remove(curr.size() -1);
-            }
-        }
-    }
-    private boolean isPalindrome(String s, int i, int j){
-        while(i < j){
-            if(s.charAt(i++) != s.charAt(j--))return false;
-        }
-        return true;
+        st.push(new int[]{price, span});
+        return span;
     }
 }
+
+/**
+ * Your StockSpanner object will be instantiated and called as such:
+ * StockSpanner obj = new StockSpanner();
+ * int param_1 = obj.next(price);
+ */
 ```
         
