@@ -1,8 +1,8 @@
 
-# 3880. Minimum Absolute Difference Between Two Values
-### Easy
-
-<p>You are given an integer array <code>nums</code> consisting only of 0, 1, and 2.</p>
+        # 3880. Minimum Absolute Difference Between Two Values
+        ### Easy
+        
+        <p>You are given an integer array <code>nums</code> consisting only of 0, 1, and 2.</p>
 
 <p>A pair of indices <code>(i, j)</code> is called <strong>valid</strong> if <code>nums[i] == 1</code> and <code>nums[j] == 2</code>.</p>
 
@@ -50,16 +50,16 @@
 	<li><code>0 &lt;= nums[i] &lt;= 2</code></li>
 </ul>
 
-
----
-## 🚀 Submission Details
-- **Status**: Accepted
-- **Runtime**: 10 ms
-- **Memory**: 89.3 MB
-
-## 💻 Code
-```java
-class Solution {
+        
+        ---
+        ## 🚀 Submission Details
+        - **Status**: Accepted
+        - **Runtime**: 10 ms
+        - **Memory**: 89.3 MB
+        
+        ## 💻 Code
+        ```java
+        class Solution {
     public int minAbsoluteDifference(int[] nums) {
         int ans =101;
         int n = nums.length;
@@ -77,5 +77,5 @@ class Solution {
         return ans != 101 ? ans : -1; 
     }
 }
-```
+        ```
         
