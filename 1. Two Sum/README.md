@@ -48,20 +48,21 @@
 ---
 ## 🚀 Submission Details
 - **Status**: Accepted
-- **Runtime**: 37 ms
-- **Memory**: 47.1 MB
+- **Runtime**: 2 ms
+- **Memory**: 46.9 MB
 
 ## 💻 Code
 ```java
 class Solution {
     public int[] twoSum(int[] nums, int target) {
         int n = nums.length;
-        for(int i=0; i<n-1; i++){
-            for(int j=i+1; j<n; j++){
-                if(nums[i]+ nums[j] == target){
-                    return new int[]{i, j};
-                }
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i=0; i<n; i++){
+            int diff = target - nums[i];
+            if(map.containsKey(diff)){
+                return new int[]{map.get(diff), i};
             }
+            map.put(nums[i], i);
         }
         return new int[]{};
     }
