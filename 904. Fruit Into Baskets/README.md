@@ -54,8 +54,8 @@ If we had started at the first tree, we would only pick from trees [1,2].
 ---
 ## 🚀 Submission Details
 - **Status**: Accepted
-- **Runtime**: 55 ms
-- **Memory**: 68.2 MB
+- **Runtime**: 53 ms
+- **Memory**: 70.4 MB
 
 ## 💻 Code
 ```java
@@ -68,14 +68,13 @@ class Solution {
         
         for(int i=0; i<n; i++){
             map.put(fruits[i], map.getOrDefault(fruits[i], 0)+1);
-            if(map.size() <= 2){
-                ans = Math.max(ans, i-j+1);
-            }
-            if(map.size() > 2){
+            
+            while(map.size() > 2){
                 map.put(fruits[j], map.get(fruits[j])-1);
                 if(map.get(fruits[j]) == 0) map.remove(fruits[j]);
                 j++;
             }
+            ans = Math.max(ans, i-j+1);
 
         }
         return ans;
