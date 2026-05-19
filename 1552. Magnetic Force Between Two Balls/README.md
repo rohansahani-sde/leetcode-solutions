@@ -41,16 +41,17 @@
 ---
 ## 🚀 Submission Details
 - **Status**: Accepted
-- **Runtime**: 50 ms
-- **Memory**: 79.2 MB
+- **Runtime**: 49 ms
+- **Memory**: 78.4 MB
 
 ## 💻 Code
 ```java
 class Solution {
     public int maxDistance(int[] position, int m) {
-        int lo = 1, hi = Integer.MAX_VALUE;
-        int ans =0;
         Arrays.sort(position);
+        int n =position.length;
+        int lo = 1, hi = position[n-1] - position[0];
+        int ans =0;
         while(lo <= hi){
             int mid = lo+(hi -lo)/2;
             if(check(position, mid, m)){
