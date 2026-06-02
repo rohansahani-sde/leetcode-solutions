@@ -110,7 +110,7 @@ Constraints:
 ## Submission Details
 - **Status**: Accepted
 - **Runtime**: 3
-- **Memory**: 45348000
+- **Memory**: 46956000
 - **Language**: java
 
 ## Code
