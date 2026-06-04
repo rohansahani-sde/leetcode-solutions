@@ -75,8 +75,8 @@ Constraints:
 
 ## Submission Details
 - **Status**: Accepted
-- **Runtime**: 27
-- **Memory**: 46592000
+- **Runtime**: 30
+- **Memory**: 46368000
 - **Language**: java
 
 ## Code
