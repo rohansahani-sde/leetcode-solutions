@@ -1,60 +1,62 @@
-
 # 131. Palindrome Partitioning
 
-### Medium
+### Difficulty: Medium
 
-<p>Given a string <code>s</code>, partition <code>s</code> such that every <span data-keyword="substring-nonempty">substring</span> of the partition is a <span data-keyword="palindrome-string"><strong>palindrome</strong></span>. Return <em>all possible palindrome partitioning of </em><code>s</code>.</p>
+## Description
+Given a string s, partition s such that every substring of the partition is a palindrome. Return all possible palindrome partitioning of s.
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
-<pre><strong>Input:</strong> s = "aab"
-<strong>Output:</strong> [["a","a","b"],["aa","b"]]
-</pre><p><strong class="example">Example 2:</strong></p>
-<pre><strong>Input:</strong> s = "a"
-<strong>Output:</strong> [["a"]]
-</pre>
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+&nbsp;
+Example 1:
+Input: s = "aab"
+Output: [["a","a","b"],["aa","b"]]
+Example 2:
+Input: s = "a"
+Output: [["a"]]
 
-<ul>
-	<li><code>1 &lt;= s.length &lt;= 16</code></li>
-	<li><code>s</code> contains only lowercase English letters.</li>
-</ul>
+&nbsp;
+Constraints:
 
 
----
-## 🚀 Submission Details
+	1 &lt;= s.length &lt;= 16
+	s contains only lowercase English letters.
+
+## Submission Details
 - **Status**: Accepted
-- **Runtime**: 8 ms
-- **Memory**: 64.9 MB
+- **Runtime**: 9
+- **Memory**: 65312000
+- **Language**: java
 
-## 💻 Code
+## Code
 ```java
 class Solution {
     public List<List<String>> partition(String s) {
-        List<List<String>> ans = new ArrayList<>();
-        backtrack(s, 0, new ArrayList<>(), ans);
-        return ans;
+         List<List<String>> ans = new ArrayList<>();
+         fun(s, 0,0, ans, new ArrayList<>());
+         return ans;
     }
-    private void backtrack(String s, int idx, List<String> curr, List<List<String>> ans ){
-        if(idx == s.length()){
-            ans.add(new ArrayList<>(curr));
+    private void fun(String s, int idx, int j, List<List<String>> ans, List<String> l){
+        if(j == s.length()){
+            if(idx == s.length()){
+                ans.add(new ArrayList<>(l));
+            }
+           
             return;
         }
-        for(int i=idx; i<s.length(); i++){
-            if(isPalindrome(s, idx, i)){
-                curr.add(s.substring(idx, i+1));
-                backtrack(s, i+1, curr, ans);
-                curr.remove(curr.size() -1);
-            }
+        String sub = s.substring(idx, j+1);
+        if(isPalindrome(sub)){
+            l.add(sub);
+            fun(s, j+1,  j+1, ans, l);
+            l.remove(l.size()-1);
         }
+        fun(s, idx, j+1,ans, l);
     }
-    private boolean isPalindrome(String s, int i, int j){
+    private boolean isPalindrome(String s){
+        int i=0, j=s.length()-1;
         while(i < j){
-            if(s.charAt(i++) != s.charAt(j--))return false;
+            if(s.charAt(i) != s.charAt(j))return false;
+            i++;j--;
         }
         return true;
     }
 }
 ```
-        
