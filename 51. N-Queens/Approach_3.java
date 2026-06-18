@@ -3,15 +3,17 @@ class Solution {
         List<List<String>> ans = new ArrayList<>(); 
         char[][] mat = new char[n][n];
         boolean[] colVis = new boolean[n];
+        boolean[] mainDia = new boolean[(2*n)-1];
+        boolean[] oppDia = new boolean[(2*n)-1];
         for(char[] ma: mat){
             Arrays.fill(ma, '.');
         }
-        fun(mat, 0, n, ans, colVis);
+        fun(mat, 0, n, ans, colVis, mainDia, oppDia);
         
         return ans;
         
     }
-    private void fun(char[][] mat, int row, int n, List<List<String>> ans, boolean[] colVis ){
+    private void fun(char[][] mat, int row, int n, List<List<String>> ans, boolean[] colVis,  boolean[] mainDia, boolean[] oppDia ){
         if(row == n){
             List<String> l = new ArrayList<>();
 
@@ -24,37 +26,21 @@ class Solution {
         }
 
         for(int j=0; j<n; j++){
-            if(isValidPlace(mat, row, j, n, colVis)){
+            if(isValidPlace(mat, row, j, n, colVis, mainDia, oppDia)){
             mat[row][j] = 'Q';
             colVis[j] = true;
-            fun(mat, row+1, n, ans, colVis);
+            mainDia[row - j +n-1] = oppDia[row+j] = true;
+            fun(mat, row+1, n, ans, colVis, mainDia, oppDia);
             colVis[j] = false;
+            mainDia[row - j +n-1] = oppDia[row+j] = false;
             mat[row][j] ='.';
             } 
              
         }
     }
-    private boolean isValidPlace(char[][] mat, int row, int col, int n, boolean[] colVis) {
+    private boolean isValidPlace(char[][] mat, int row, int col, int n, boolean[] colVis,  boolean[] mainDia, boolean[] oppDia) {
         if(colVis[col]) return false;
-    // for (int i = 0; i < row; i++) {
-    //     if (mat[i][col] == 'Q') return false;
-    // }
-
-    int r = row, c = col;
-    while (r >= 0 && c >= 0) {
-        if (mat[r][c] == 'Q') return false;
-        r--;
-        c--;
-    }
-
-    r = row;
-    c = col;
-    while (r >= 0 && c < n) {
-        if (mat[r][c] == 'Q') return false;
-        r--;
-        c++;
-    }
-
-    return true;
+        if(mainDia[row - col +n-1] || oppDia[row+col]) return false;
+        return true;
 }
 }
